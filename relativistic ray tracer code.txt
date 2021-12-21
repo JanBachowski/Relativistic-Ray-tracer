@@ -1,0 +1,43 @@
+ TColor pixel;
+ //scene creation
+ float c = 20
+ float vx = 5, vy = 10, vz = 0;
+ float camx = rs/2, camy =rs/2, camz=-2;
+ float rayx= xs - camx, rayy = ys - camy, rayz = -camz;
+ float ax = 100 + vx, ay = 20 + vy, az = 0 + vz;
+ float bx = 200 + vx, by = 120 + vy, bz = +800 + vz;
+ float cx = 150 + vx, cy = 320 + vy, cz = 0 + vz;
+ 
+ 
+ //raytracing
+
+ //float alpha = (ax*(camy*rayz-by*rayz+(bz-camz)*rayy) +bx*(-camy*(rayz+ay*rayz+(camz-az)*rayy) +camx*(by*rayz-ay*rayz+(az-bz)*rayy)
+ // +(ay*(camz-bz)+by*(az-camz)+(bz-az)*camy)*rayx) /(ax*(cy*rayz-by*rayz+(bz-cz)*rayy)
+ //+bx*(-cy*rayz+ay*rayz+(cz-az)*rayy) +cx*(by*rayz-ay*rayz+(az-bz)*rayy) +(ay*(cz-bz)+by*(az-cz)+(bz-az)*cy)*rayx);
+
+float alpha = (ax*(camy*rayz-by*rayz+(bz-camz)*rayy) +bx*(-camy*rayz+ay*rayz+(camz-az)*rayy) +camx*(by*rayz-ay*rayz+(az-bz)*rayy) +(ay*(camz-bz)+by*(az-camz)+(bz-az)*camy)*rayx) /(ax*(cy*rayz-by*rayz+(bz-cz)*rayy) +bx*(-cy*rayz+ay*rayz+(cz-az)*rayy) +cx*(by*rayz-ay*rayz+(az-bz)*rayy) +(ay*(cz-bz)+by*(az-cz)+(bz-az)*cy)*rayx);
+
+ float beta = (ax*(cy*rayz-camy*rayz+(camz-cz)*rayy) +camx*(-cy*rayz+ay*rayz+(cz-az)*rayy)
+ +cx*(camy*rayz-ay*rayz+(az-camz)*rayy) +(ay*(cz-camz)+camy*(az-cz)+(camz-az)*cy)*rayx) /(ax*(cy*rayz-by*rayz+(bz-cz)*rayy)
+  +bx*(-cy*rayz+ay*rayz+(cz-az)*rayy) +cx*(by*rayz-ay*rayz+(az-bz)*rayy) +(ay*(cz-bz)+by*(az-cz)+(bz-az)*cy)*rayx);
+
+ if( alpha >= 0 && beta >= 0 && alpha + beta <= 1)
+   pixel = RGB(255,10,100);
+ else
+   pixel = RGB(0,10,100);
+
+   
+   
+   NEW EQ TO SOLVE
+   
+   camx + rayx t c = (ax + vx) + alpha (cx - ax) + beta (bx - ax)
+   camy + rayy t c = (ay + vy) + alpha (cy - ay) + beta (by - ay)
+   camz + rayz t c = (az + vz) + alpha (cz - az) + beta (bz - az)
+   
+   solutions to new equations:
+   
+   alpha = (ax*(camy*(vz-raycz)+by*(raycz-vz)+(bz-camz)*vy +(camz-bz)*raycy) +camx*(by*(vz-raycz)+ay*(raycz-vz)+(az-bz)*vy+(bz-az)*raycy) 
+   +bx*(ay*(vz-raycz)+camy*(raycz-vz)+(camz-az)*vy+(az-camz)*raycy) +(ay*(camz-bz)+by*(az-camz)+(bz-az)*camy)*vx +(by*(camz-az)+ay*(bz-camz)+(az-bz)*camy)*raycx) 
+   /(ax*(cy*(vz-raycz)+by*(raycz-vz)+(bz-cz)*vy+(cz-bz)*raycy) +cx*(by*(vz-raycz)+ay*(raycz-vz)+(az-bz)*vy+(bz-az)*raycy) +bx*(ay*(vz-raycz)+cy*(raycz-vz)+(cz-az)*vy+(az-cz)*raycy) 
+   +(ay*(cz-bz)+by*(az-cz)+(bz-az)*cy) vx +(by*(cz-az)+ay*(bz-cz)+(az-bz)*cy)*raycx);
+   beta = 

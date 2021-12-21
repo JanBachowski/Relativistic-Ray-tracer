@@ -1,0 +1,4 @@
+﻿  ray tracer.cpp
+c:\users\jan\desktop\ray tracer\ray tracer\ray tracer.cpp(133): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\jan\desktop\ray tracer\ray tracer\ray tracer.cpp(159): warning C4305: 'initializing': truncation from 'int' to 'float'
+  ray tracer.vcxproj -> C:\Users\Jan\Desktop\ray tracer\Debug\ray tracer.exe
